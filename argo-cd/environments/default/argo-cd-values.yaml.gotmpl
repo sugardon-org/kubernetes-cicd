@@ -1,0 +1,31 @@
+## ArgoCD configuration
+## cf. https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
+---
+installCRDs: false
+
+# cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L330
+server:
+  #containerPort: 30305
+
+  # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L520
+  config:
+   url: http://localhost:8080
+   dex.config: |
+     connectors:
+       # GitHub example
+       - type: github
+         id: github
+         name: GitHub
+         config:
+           #clientID: 43ac73f3f1e1e3b648f4
+           #clientSecret: c23a8c83105bab078e8ce221101504c2590a9dac
+           clientID: {{ .Values.github.clientid }}
+           clientSecret: {{ .Values.github.clientsecret }}
+           orgs:
+           - name: sugardon-org
+
+  # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L554
+  rbacConfig:
+    policyDefault: role:readonly
+    policy.csv: |
+      g, sugardon-org:admin, role:admin
