@@ -28,6 +28,9 @@ jobs:
           helmfile --version
           helm version
           kubectl version --client
+      - name: setup
+        run: |
+          make add-repo
       - name: lint
         run: |
           make lint

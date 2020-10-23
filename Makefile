@@ -1,5 +1,8 @@
 all: lint
 
+add-repo:
+	helm repo add argo https://argoproj.github.io/argo-helm
+
 lint: helmfile-lint
 
 helmfile-lint:
