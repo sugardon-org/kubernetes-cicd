@@ -1,0 +1,33 @@
+---
+name: ansible check
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Setup helmfile
+        uses: mamezou-tech/setup-helmfile@v0.5.0
+      - name: show
+        run: |
+          helmfile --version
+          helm version
+          kubectl version --client
+      - name: lint
+        run: |
+          make lint
