@@ -21,7 +21,8 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           git-user-signingkey: true
-        run:
+      - name: setup gpg
+        run: |
           gpg --export-secret-keys > ~/.gnupg/secring.gpg
 
       - name: Setup helmfile
