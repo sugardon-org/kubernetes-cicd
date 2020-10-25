@@ -23,6 +23,7 @@ jobs:
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
 
       - name: Setup helmfile
         uses: mamezou-tech/setup-helmfile@v0.5.0
