@@ -1,15 +1,14 @@
 ---
-name: ansible check
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  helmfile-check:
+    name: Check Helmfile
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        python-version: [3.8]
+      fail-fast: true
 
     steps:
       - uses: actions/checkout@v2
@@ -21,22 +20,28 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           git-user-signingkey: true
-      - name: setup gpg
+      - name: Setup and Check GPG
         run: |
           export GPG_TTY=$(tty)
           gpg --pinentry-mode loopback --passphrase ${{ secrets.PASSPHRASE }} --export-secret-keys > ~/.gnupg/secring.gpg
 
       - name: Setup helmfile
         uses: mamezou-tech/setup-helmfile@v0.5.0
-      - name: show
+      - name: Show helmfile, helm and kubectl
         run: |
           helmfile --version
           helm version
           kubectl version --client
-      - name: setup
+      - name: Setup dependency
         run: |
           make install-plugin
           make add-repo
-      - name: lint
+      - name: lint helmfile
         run: |
           make lint
+
+  #yaml-check:
+  #runs-on: ubuntu-latest
+  #strategy:
+  #matrix:
+  #python-version: [3.8]
