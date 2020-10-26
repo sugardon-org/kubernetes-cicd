@@ -1,5 +1,8 @@
 all: lint
 
+install-plugin:
+	helm plugin install https://github.com/futuresimple/helm-secrets
+
 add-repo:
 	helm repo add argo https://argoproj.github.io/argo-helm
 

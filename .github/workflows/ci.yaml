@@ -35,6 +35,7 @@ jobs:
           kubectl version --client
       - name: setup
         run: |
+          make install-plugin
           make add-repo
       - name: lint
         run: |
