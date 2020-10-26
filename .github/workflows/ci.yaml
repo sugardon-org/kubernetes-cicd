@@ -23,6 +23,7 @@ jobs:
           git-user-signingkey: true
       - name: setup gpg
         run: |
+          export GPG_TTY=$(tty)
           gpg --pinentry-mode loopback --passphrase ${{ secrets.PASSPHRASE }} --export-secret-keys > ~/.gnupg/secring.gpg
 
       - name: Setup helmfile
