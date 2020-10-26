@@ -17,8 +17,6 @@ server:
          id: github
          name: GitHub
          config:
-           #clientID: 43ac73f3f1e1e3b648f4
-           #clientSecret: c23a8c83105bab078e8ce221101504c2590a9dac
            clientID: {{ .Values.github.clientid }}
            clientSecret: {{ .Values.github.clientsecret }}
            orgs:

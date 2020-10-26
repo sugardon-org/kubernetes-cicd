@@ -1,0 +1,47 @@
+---
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  helmfile-check:
+    name: Check Helmfile
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+      - name: Setup and Check GPG
+        run: |
+          export GPG_TTY=$(tty)
+          gpg --pinentry-mode loopback --passphrase ${{ secrets.PASSPHRASE }} --export-secret-keys > ~/.gnupg/secring.gpg
+
+      - name: Setup helmfile
+        uses: mamezou-tech/setup-helmfile@v0.5.0
+      - name: Show helmfile, helm and kubectl
+        run: |
+          helmfile --version
+          helm version
+          kubectl version --client
+      - name: Setup dependency
+        run: |
+          make install-plugin
+          make add-repo
+      - name: lint helmfile
+        run: |
+          make lint
+
+  #yaml-check:
+  #runs-on: ubuntu-latest
+  #strategy:
+  #matrix:
+  #python-version: [3.8]
