@@ -4,13 +4,13 @@ environments:
 
 ---
 repositories:
-# To use official "stable" charts a.k.a https://github.com/helm/charts/tree/master/stable
-- name: stable
-  url: https://kubernetes-charts.storage.googleapis.com
-- name: bitnami
-  url: https://charts.bitnami.com/bitnami
-- name: argo
-  url: https://argoproj.github.io/argo-helm
+  # To use official "stable" charts a.k.a https://github.com/helm/charts/tree/master/stable
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
 
 ---
 helmfiles:

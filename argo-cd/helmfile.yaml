@@ -2,7 +2,7 @@
 environments:
   default:
     secrets:
-    - environments/default/argo-cd-secrets.yaml
+      - environments/default/argo-cd-secrets.yaml
 
 ---
 releases:
