@@ -19,19 +19,19 @@ server:
 
   # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L520
   config:
-   #url: http://localhost:8080
-   url: http://argocd.sugardon.com
-   dex.config: |
-     connectors:
-       # GitHub example
-       - type: github
-         id: github
-         name: GitHub
-         config:
-           clientID: {{ .Values.github.clientid }}
-           clientSecret: {{ .Values.github.clientsecret }}
-           orgs:
-           - name: sugardon-org
+    # url: http://localhost:8080
+    url: http://argocd.sugardon.com
+    dex.config: |
+      connectors:
+        # GitHub
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: {{ .Values.github.clientid }}
+            clientSecret: {{ .Values.github.clientsecret }}
+            orgs:
+            - name: sugardon-org
 
   # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L554
   rbacConfig:
