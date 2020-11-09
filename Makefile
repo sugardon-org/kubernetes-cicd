@@ -1,3 +1,5 @@
+export GPG_TTY=$(tty)
+
 all: lint
 
 setup:
