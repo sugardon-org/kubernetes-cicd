@@ -38,6 +38,13 @@ jobs:
           helmfile --version
           helm version
           kubectl version --client
+      - name: Uninstall default plugin
+        run: |
+          helm plugin uninstall diff
+      - name: Setup dependency
+        run: |
+          make install-plugin
+          make add-repo
 
       - name: Set kubeconfig
         run: |
