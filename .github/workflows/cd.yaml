@@ -9,9 +9,6 @@ on:
 jobs:
   deploy-helmfile:
     name: Deploy Helmfile
-    needs:
-      - helmfile-check
-      - yaml-check
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
