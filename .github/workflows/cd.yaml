@@ -43,7 +43,7 @@ jobs:
           make install-plugin
           make add-repo
 
-      - name: Set kubectl
+      - name: Check valid kubectl config
         run: |
           echo "${{ secrets.KUBECONFIG }}" > /tmp/kubeconfig
           export KUBECONFIG=/tmp/kubeconfig
@@ -51,9 +51,9 @@ jobs:
 
       - name: Show diff
         run: |
-          helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} diff
+          KUBECONFIG=/tmp/kubeconfig helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} diff
 
       - name: helmfile sync
         run: |
-          helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} sync
+          KUBECONFIG=/tmp/kubeconfig helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} sync
 
