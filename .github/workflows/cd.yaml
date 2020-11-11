@@ -1,0 +1,54 @@
+---
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-helmfile:
+    name: Deploy Helmfile
+    needs:
+      - helmfile-check
+      - yaml-check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+      - name: Setup and Check GPG
+        run: |
+          export GPG_TTY=$(tty)
+          gpg --pinentry-mode loopback --passphrase ${{ secrets.PASSPHRASE }} --export-secret-keys > ~/.gnupg/secring.gpg
+
+      - name: Setup helmfile
+        uses: mamezou-tech/setup-helmfile@v0.5.0
+      - name: Show helmfile, helm and kubectl
+        run: |
+          helmfile --version
+          helm version
+          kubectl version --client
+
+      - name: Set kubeconfig
+        run: |
+          echo ${{ secrets.KUBECONFIG }} > /tmp/kubeconfig
+          export KUBECONFIG=/tmp/config
+
+      - name: Show diff
+        run: |
+          helmfile -e default diff
+
+      - name: helmfile sync
+        run: |
+          helmfile -e default sync
+
