@@ -51,9 +51,9 @@ jobs:
 
       - name: Show diff
         run: |
-          helmfile -e default diff
+          helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} diff
 
       - name: helmfile sync
         run: |
-          helmfile -e default sync
+          helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} sync
 
