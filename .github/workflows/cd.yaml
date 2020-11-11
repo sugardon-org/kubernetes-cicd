@@ -43,10 +43,11 @@ jobs:
           make install-plugin
           make add-repo
 
-      - name: Set kubeconfig
+      - name: Set kubectl
         run: |
           echo "${{ secrets.KUBECONFIG }}" > /tmp/kubeconfig
           export KUBECONFIG=/tmp/kubeconfig
+          kubectl config use-context ${{ secrets.KUBECONTEXT }}
 
       - name: Show diff
         run: |
