@@ -46,7 +46,7 @@ jobs:
       - name: Set kubeconfig
         run: |
           echo ${{ secrets.KUBECONFIG }} > /tmp/kubeconfig
-          export KUBECONFIG=/tmp/config
+          export KUBECONFIG=/tmp/kubeconfig
 
       - name: Show diff
         run: |
