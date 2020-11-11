@@ -1,11 +1,17 @@
 ---
-name: CI
+name: CD
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  helmfile-check:
-    name: Check Helmfile
+  deploy-helmfile:
+    name: Deploy Helmfile
+    needs:
+      - helmfile-check
+      - yaml-check
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -39,28 +45,17 @@ jobs:
         run: |
           make install-plugin
           make add-repo
-      - name: lint helmfile
-        run: |
-          make helmfile-lint
 
-  yaml-check:
-    name: Check with yamllint
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        python-version: [3.8]
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+      - name: Set kubeconfig
         run: |
-          make setup
-      - name: yamllint
+          echo ${{ secrets.KUBECONFIG }} > /tmp/kubeconfig
+          export KUBECONFIG=/tmp/config
+
+      - name: Show diff
         run: |
-          make yamllint
+          helmfile -e default diff
+
+      - name: helmfile sync
+        run: |
+          helmfile -e default sync
+
