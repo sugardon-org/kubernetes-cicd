@@ -7,6 +7,7 @@ setup:
 
 install-plugin:
 	helm plugin install https://github.com/futuresimple/helm-secrets
+	helm plugin install https://github.com/databus23/helm-diff
 
 add-repo:
 	helm repo add argo https://argoproj.github.io/argo-helm
