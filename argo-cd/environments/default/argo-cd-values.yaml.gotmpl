@@ -33,6 +33,14 @@ server:
             orgs:
             - name: sugardon-org
 
+    # https://github.com/argoproj/argo-cd/issues/1704
+    resource.customizations: |
+      networking.k8s.io/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+
   # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L554
   rbacConfig:
     policyDefault: role:readonly
