@@ -1,0 +1,24 @@
+---
+# cf. https://github.com/argoproj/argo-helm/blob/fbec017cfbd4845bd188269f1e69af6251633b8e/charts/argo-cd/values.yaml#L583
+server:
+  additionalApplications:
+    - name: tekton-ci
+      namespace: helmfile-argocd-{{ .Environment.Name }}
+      additionalLabels: {}
+      additionalAnnotations: {}
+      project: default
+      source:
+        repoURL: https://github.com/sugardon-org/tekton-ci
+        targetRevision: HEAD
+        path: tests/overlays/development
+        directory:
+          recurse: false
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: tekton-ci
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false
+        syncOptions:
+          - CreateNamespace=true
