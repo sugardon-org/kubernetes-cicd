@@ -2,20 +2,20 @@
 # cf. https://github.com/argoproj/argo-helm/blob/fbec017cfbd4845bd188269f1e69af6251633b8e/charts/argo-cd/values.yaml#L583
 server:
   additionalApplications:
-    - name: tekton-ci-apps
+    - name: tekton-cicd-apps
       namespace: helmfile-argocd-{{ .Environment.Name }}
       additionalLabels: {}
       additionalAnnotations: {}
       project: default
       source:
-        repoURL: https://github.com/sugardon-org/tekton-ci
+        repoURL: https://github.com/sugardon-org/tekton-cicd
         targetRevision: main
         path: argocd-apps
         directory:
           recurse: true
       destination:
         server: https://kubernetes.default.svc
-        namespace: tekton-ci
+        namespace: tekton-cicd
       syncPolicy:
         automated:
           prune: false
