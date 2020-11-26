@@ -16,5 +16,5 @@ releases:
       - environments/{{ .Environment.Name }}/argo-cd-values.yaml.gotmpl
       # disable because cf. https://github.com/helm/helm/issues/8615
       # use
-      # $ helmfile -e default template
-      # - environments/{{ .Environment.Name }}/applications.yaml.gotmpl
+      # $ helmfile -e sugardon01 template
+      - environments/{{ .Environment.Name }}/applications.yaml.gotmpl
