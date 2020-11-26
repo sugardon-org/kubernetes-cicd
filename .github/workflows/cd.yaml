@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
+    env:
+      HELMFILE_ENV: default
 
     steps:
       - uses: actions/checkout@v2
@@ -51,9 +53,9 @@ jobs:
 
       - name: Show diff
         run: |
-          KUBECONFIG=/tmp/kubeconfig helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} diff
+          KUBECONFIG=/tmp/kubeconfig helmfile -e $HELMFILE_ENV --kube-context ${{ secrets.KUBECONTEXT }} diff
 
       - name: helmfile sync
         run: |
-          KUBECONFIG=/tmp/kubeconfig helmfile -e default --kube-context ${{ secrets.KUBECONTEXT }} sync
+          KUBECONFIG=/tmp/kubeconfig helmfile -e $HELMFILE_ENV --kube-context ${{ secrets.KUBECONTEXT }} sync
 
