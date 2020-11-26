@@ -17,4 +17,4 @@ releases:
       # disable because cf. https://github.com/helm/helm/issues/8615
       # use
       # $ helmfile -e sugardon01 template
-      - environments/{{ .Environment.Name }}/applications.yaml.gotmpl
+      # - environments/{{ .Environment.Name }}/applications.yaml.gotmpl
