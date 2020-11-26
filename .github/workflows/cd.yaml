@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: true
     env:
-      HELMFILE_ENV: default
+      HELMFILE_ENV: sugardon01
 
     steps:
       - uses: actions/checkout@v2
