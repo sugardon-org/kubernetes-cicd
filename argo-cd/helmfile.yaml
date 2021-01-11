@@ -3,6 +3,9 @@ environments:
   sugardon01:
     secrets:
       - environments/sugardon01/argo-cd-secrets.yaml
+  sugardon02:
+    secrets:
+      - environments/sugardon02/argo-cd-secrets.yaml
 
 ---
 releases:

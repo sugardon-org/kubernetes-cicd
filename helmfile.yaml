@@ -1,6 +1,7 @@
 ---
 environments:
   sugardon01:
+  sugardon02:
 
 ---
 repositories:

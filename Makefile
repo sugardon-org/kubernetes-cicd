@@ -14,12 +14,15 @@ lint: yamllint helmfile-lint
 
 helmfile-lint:
 	helmfile -e sugardon01 lint
+	helmfile -e sugardon02 lint
 
 yamllint:
 	yamllint -c .yamllint.yaml ./
 
 encrypt:
 	cd ./argo-cd/environments/sugardon01 && helm secrets enc argo-cd-secrets.yaml
+	cd ./argo-cd/environments/sugardon02 && helm secrets enc argo-cd-secrets.yaml
 
 decrypt:
 	cd ./argo-cd/environments/sugardon01 && helm secrets dec argo-cd-secrets.yaml
+	cd ./argo-cd/environments/sugardon02 && helm secrets dec argo-cd-secrets.yaml
