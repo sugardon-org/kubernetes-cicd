@@ -1,4 +1,4 @@
 ---
 creation_rules:
   # As failover encrypt with PGP
-  - pgp: "FADE 37B1 FAAC 69AC 880C  3926 EF70 3E7A E8B9 0693"
+  - pgp: "2CA7 FB06 1107 9C29 A18A  9DC1 67F5 823C 4460 9CC1"
