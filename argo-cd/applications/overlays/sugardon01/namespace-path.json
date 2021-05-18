@@ -1,0 +1,5 @@
+[
+  {"op": "replace",
+   "path": "/spec/destination/namespace",
+   "value": "helmfile-argocd-sugardon01"}
+]
