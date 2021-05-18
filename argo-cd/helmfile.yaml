@@ -18,4 +18,6 @@ releases:
     values:
       - environments/{{ .Environment.Name }}/argo-cd-values.yaml.gotmpl
   - name: helmfile-argocd-{{ .Environment.Name }}-applications
-    chart: ./applications/overlays/{{ .Environment.Name }}
+    # TODO: prepare sugardon02
+    # chart: ./applications/overlays/{{ .Environment.Name }}
+    chart: ./applications/overlays/sugardon01
