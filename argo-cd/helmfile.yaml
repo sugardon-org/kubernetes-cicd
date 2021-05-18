@@ -17,5 +17,5 @@ releases:
     version: 3.3.3
     values:
       - environments/{{ .Environment.Name }}/argo-cd-values.yaml.gotmpl
-  #- name: helmfile-argocd-{{ .Environment.Name }}-applications
-  #chart: ./applications/overlays/sugardon01
+  - name: helmfile-argocd-{{ .Environment.Name }}-applications
+    chart: ./applications/overlays/{{ .Environment.Name }}
