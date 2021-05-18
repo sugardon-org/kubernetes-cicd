@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton-cicd-apps
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sugardon-org/tekton-cicd
+    targetRevision: main
+    path: argocd-apps/overlays/sugardon01
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tekton-cicd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
