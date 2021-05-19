@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: argocd-apps/overlays/sugardon01
     directory:
-      recurse: true
+      recurse: false
   destination:
     server: https://kubernetes.default.svc
     namespace: dummy
