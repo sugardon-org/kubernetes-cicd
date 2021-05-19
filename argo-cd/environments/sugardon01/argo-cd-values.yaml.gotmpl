@@ -32,12 +32,19 @@ server:
             orgs:
             - name: sugardon-org
 
-    # https://github.com/argoproj/argo-cd/issues/1704
     resource.customizations: |
+      # https://github.com/argoproj/argo-cd/issues/1704
       networking.k8s.io/Ingress:
         health.lua: |
           hs = {}
           hs.status = "Healthy"
+          return hs
+      # https://github.com/argoproj/argo-cd/issues/5991
+      bitnami.com/SealedSecret:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          hs.message = "Controller doesn't report resource status"
           return hs
 
   # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L554
