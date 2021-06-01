@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: helmfile-argocd-sugardon01
 resources:
   - kubernetes-secret.yaml
+  - kubernetes-cert.yaml
   - tekton-cicd.yaml
   - ../../base
 
