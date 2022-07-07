@@ -55,10 +55,8 @@ jobs:
           context: ${{ secrets.KUBECONTEXT }}
 
       - name: Show diff
-        run: |
-          KUBECONFIG=/tmp/kubeconfig helmfile -e $HELMFILE_ENV --kube-context ${{ secrets.KUBECONTEXT }} diff
+        run: helmfile -e $HELMFILE_ENV diff
 
       - name: helmfile sync
-        run: |
-          KUBECONFIG=/tmp/kubeconfig helmfile -e $HELMFILE_ENV --kube-context ${{ secrets.KUBECONTEXT }} sync
+        run: helmfile -e $HELMFILE_ENV sync
 
