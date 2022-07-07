@@ -48,11 +48,11 @@ jobs:
           make install-plugin
           make add-repo
 
-      - name: Check valid kubectl config
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" > /tmp/kubeconfig
-          export KUBECONFIG=/tmp/kubeconfig
-          kubectl config use-context ${{ secrets.KUBECONTEXT }}
+      - uses: azure/k8s-set-context@v2.0
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          context: ${{ secrets.KUBECONTEXT }}
 
       - name: Show diff
         run: |
