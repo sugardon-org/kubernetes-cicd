@@ -1,10 +1,18 @@
 ---
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: tekton-cicd
+spec:
+  description: "sugardon-org/tekton-cicd project"
+
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: tekton-cicd-apps
 spec:
-  project: default
+  project: tekton-cicd
   source:
     repoURL: https://github.com/sugardon-org/tekton-cicd
     targetRevision: main
