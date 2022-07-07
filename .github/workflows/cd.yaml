@@ -48,7 +48,7 @@ jobs:
           make install-plugin
           make add-repo
 
-      - uses: azure/k8s-set-context@v2.0
+      - uses: azure/k8s-set-context@v2
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
