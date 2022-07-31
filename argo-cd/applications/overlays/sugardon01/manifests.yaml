@@ -1,0 +1,37 @@
+---
+# https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/project.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: manifests
+spec:
+  description: "sugardon-org/manifests project"
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests
+spec:
+  project: manifests
+  source:
+    repoURL: https://github.com/sugardon-org/manifests
+    targetRevision: main
+    path: argocd-apps/overlays/sugardon01
+    directory:
+      recurse: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dummy
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false

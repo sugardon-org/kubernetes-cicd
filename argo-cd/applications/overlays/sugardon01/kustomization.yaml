@@ -7,6 +7,7 @@ resources:
   - kubernetes-secret.yaml
   - kubernetes-cert.yaml
   - tekton-cicd.yaml
+  - manifests.yaml
   - ../../base
 
 patches:
