@@ -54,8 +54,8 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
           context: ${{ secrets.KUBECONTEXT }}
 
-      - name: Show diff
-        run: helmfile -e $HELMFILE_ENV diff
+      #- name: Show diff
+      #  run: helmfile -e $HELMFILE_ENV diff
 
       - name: helmfile sync
         run: helmfile -e $HELMFILE_ENV sync
