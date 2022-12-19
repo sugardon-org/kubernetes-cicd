@@ -1,0 +1,9 @@
+{
+  "extends": ["config:base"],
+  "schedule": ["every weekend"],
+  "dependencyDashboard": true,
+  "timezone": "Asia/Tokyo",
+  "prHourlyLimit": 0,
+  "labels": ["dependencies", "renovate"],
+  "rangeStrategy": "bump"
+}
