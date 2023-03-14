@@ -1,0 +1,11 @@
+---
+environments:
+  sugardon01:
+  sugardon02:
+
+---
+releases:
+  - name: helmfile-tekton-{{ .Environment.Name }}-kustomize
+    # TODO: prepare sugardon02
+    # chart: ./applications/overlays/{{ .Environment.Name }}
+    chart: ./kustomize/overlays/sugardon01
