@@ -4,7 +4,6 @@ kind: Kustomization
 
 namespace: tekton-cicd
 resources:
-  - https://storage.googleapis.com/tekton-releases/operator/previous/v0.55.1/release.yaml
   - tekton-config.yaml
   - tekton-chain.yaml
   - ../../base
