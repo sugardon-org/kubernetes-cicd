@@ -4,6 +4,4 @@ kind: Kustomization
 
 namespace: tekton-cicd
 resources:
-  - tekton-config.yaml
-  - tekton-chain.yaml
   - ../../base
