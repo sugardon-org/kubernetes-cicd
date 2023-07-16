@@ -34,7 +34,7 @@ jobs:
       - name: Setup helmfile
         uses: mamezou-tech/setup-helmfile@v1.2.0
         with:
-          helmfile-version: v0.144.0
+          helmfile-version: v0.148.1
       - name: Show helmfile, helm and kubectl
         run: |
           helmfile --version
