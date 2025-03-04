@@ -26,7 +26,7 @@ jobs:
           gpg --pinentry-mode loopback --passphrase ${{ secrets.PASSPHRASE }} --export-secret-keys > ~/.gnupg/secring.gpg
 
       - name: Setup helmfile
-        uses: mamezou-tech/setup-helmfile@v1.3.0
+        uses: mamezou-tech/setup-helmfile@v2.1.0
         with:
           helmfile-version: v0.157.0
       - name: Show helmfile, helm and kubectl
