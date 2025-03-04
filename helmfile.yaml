@@ -15,4 +15,3 @@ repositories:
 ---
 helmfiles:
   - ./argo-cd/helmfile.yaml
-  - ./tekton/helmfile.yaml
