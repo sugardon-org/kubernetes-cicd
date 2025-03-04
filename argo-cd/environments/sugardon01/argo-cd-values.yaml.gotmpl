@@ -12,12 +12,11 @@ server:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       nginx.ingress.kubernetes.io/rewrite-target: /
-    hosts:
-      - argocd.sugardon.com
+    hostname: argocd.sugardon.com
     https: true
 
-  # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L520
-  config:
+configs:
+  cm:
     # url: http://localhost:8080
     url: https://argocd.sugardon.com
     dex.config: |
@@ -32,23 +31,7 @@ server:
             orgs:
             - name: sugardon-org
 
-    resource.customizations: |
-      # https://github.com/argoproj/argo-cd/issues/1704
-      networking.k8s.io/Ingress:
-        health.lua: |
-          hs = {}
-          hs.status = "Healthy"
-          return hs
-      # https://github.com/argoproj/argo-cd/issues/5991
-      bitnami.com/SealedSecret:
-        health.lua: |
-          hs = {}
-          hs.status = "Healthy"
-          hs.message = "Controller doesn't report resource status"
-          return hs
-
-  # cf. https://github.com/argoproj/argo-helm/blob/a41ea8cd0ba5a84e1b422e9a6431810fd84c40f2/charts/argo-cd/values.yaml#L554
-  rbacConfig:
+  rbac:
     policyDefault: role:readonly
     policy.csv: |
       g, sugardon-org:admin, role:admin
