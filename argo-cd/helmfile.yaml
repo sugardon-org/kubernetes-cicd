@@ -14,7 +14,7 @@ releases:
     namespace: helmfile-argocd-{{ .Environment.Name }}
     createNamespace: true
     chart: argo/argo-cd
-    version: 5.55.0
+    version: 7.7.23
     values:
       - environments/{{ .Environment.Name }}/argo-cd-values.yaml.gotmpl
   - name: helmfile-argocd-{{ .Environment.Name }}-applications
